@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logistic Regression Experiment</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Logistic Regression Cluster Shift Experiment</h1>
+
+    <form id="experiment-form" onsubmit="runExperiment(event)">
+      <label for="start">Shift Start:</label>
+      <input type="number" step="0.01" id="start" name="start" required />
+      <br />
+      <label for="end">Shift End:</label>
+      <input type="number" step="0.01" id="end" name="end" required />
+      <br />
+      <label for="step_num">Number of Steps:</label>
+      <input type="number" step="1" id="step_num" name="step_num" required />
+      <br />
+      <button type="submit">Run Experiment</button>
+    </form>
+
+    <div id="results" hidden>
+      <h2>Experiment Results</h2>
+      <div>
+        <img id="dataset-img" src="" alt="Dataset Plot" hidden />
+        <p>Cluster Distribution with Shift</p>
+      </div>
+      <div>
+        <img
+          id="parameters-img"
+          src=""
+          alt="Parameters vs Shift Distance"
+          hidden
+        />
+        <p>Model Parameters as a Function of Shift</p>
+      </div>
+    </div>
+
+    <script>
+      function runExperiment(event) {
+        event.preventDefault();
+
+        // Fetch input values
+        const start = parseFloat(document.getElementById("start").value);
+        const end = parseFloat(document.getElementById("end").value);
+        const stepNum = parseInt(document.getElementById("step_num").value, 10);
+
+        // Validate input
+        if (start >= end || stepNum <= 0) {
+          alert(
+            'Ensure "Shift Start" is less than "Shift End" and steps are positive.'
+          );
+          return;
+        }
+
+        // Display results section
+        document.getElementById("results").hidden = false;
+
+        // Update images (mocked)
+        const datasetImg = document.getElementById("dataset-img");
+        const parametersImg = document.getElementById("parameters-img");
+
+        datasetImg.src = "/static/mock-dataset.png";
+        datasetImg.hidden = false;
+        parametersImg.src = "/static/mock-parameters.png";
+        parametersImg.hidden = false;
+
+        alert(
+          `Experiment ran with Shift Start: ${start}, Shift End: ${end}, Steps: ${stepNum}`
+        );
+      }
+    </script>
+  </body>
+</html>
